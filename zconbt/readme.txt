@@ -1,4 +1,4 @@
-z/OS Connect Enterprise Edition Build Toolkit Version ${zconbt.ver}.${zconbt.rel} (20200817-1534)
+z/OS Connect Enterprise Edition Build Toolkit Version 1.3 (20210118-1145)
 ===============================================================================
 
 IBM Knowledge Center
@@ -100,6 +100,6 @@ samples/service/sample_restClient_sar.properties is the sample properties file f
 samples/apiRequester/sample_ara.properties is the sample properties file for API requester.
 
 *******************************************************************************
-(C) Copyright IBM Corporation 2017, 2019 All rights reserved.
+(C) Copyright IBM Corporation 2017, 2021 All rights reserved.
     For legal information, see http://www.ibm.com/legal/copytrade.shtml
 *******************************************************************************
