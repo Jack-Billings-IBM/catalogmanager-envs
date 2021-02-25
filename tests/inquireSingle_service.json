@@ -1,0 +1,1 @@
+{"errorMessage":"BAQR0417W: The request payload under request URL http://10.1.1.2:9080/zosConnect/services/inquireSingle could not be parsed. A JSON object format payload is expected. Error: Invalid number literal on line 1, column 1."}

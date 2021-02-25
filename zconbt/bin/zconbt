@@ -1,0 +1,56 @@
+#!/bin/sh
+#
+# HZC3000 - z/OS Connect Enterprise Edition 3.0.36
+#
+# <copyright
+# notice="rm-source-program"
+# pids="5655-CE3"
+# years="2016,2019" >
+# Licensed Materials - Property of IBM
+#
+# Restricted Materials of IBM
+#
+# 5655-CE3
+#
+# (C) Copyright IBM Corp. 2016, 2019
+#
+# US Government Users Restricted Rights - Use, duplication or
+# disclosure restricted by GSA ADP Schedule Contract with
+# IBM Corp.
+# </copyright>
+#
+# Utility function to output log if ZCN_SHDBG envvar is non-null
+log() {
+	if [ "x$ZCN_SHDBG" != "x" ]
+	then
+		echo "$1" 1>&2
+	fi
+}
+# Pass additional properties on command line
+ZCN_JAVA_OPTS=
+
+# Runtime constants
+ZCN_SCRIPT_DIR=$(dirname "$0")
+ZCN_SCRIPT=$(basename "$0")
+
+log "Starting z/os Connect Build Toolkit script"
+log "ZCN_SCRIPT_DIR=$ZCN_SCRIPT_DIR"
+log "ZCN_SCRIPT=$ZCN_SCRIPT"
+
+# Determine where suitable JRE is located
+JVM=$(command -v java)
+log "Using JVM as: $JVM"
+if [ "x$JVM" != "x" ]; then
+	JVMVER="$($JVM -version 2>&1)"
+	log "Java details: $JVMVER"
+	log "ZCN_JAVA_OPTS=$ZCN_JAVA_OPTS"
+	CMD="${JVM} ${ZCN_JAVA_OPTS} -classpath ${ZCN_SCRIPT_DIR}/../lib/\*:${ZCN_SCRIPT_DIR}/../plugins/\* com.ibm.zosconnect.buildtoolkit.cli.BuildToolkit $@"
+	log "CMD=$CMD"
+	eval "$CMD"
+	EXITCODE=$?
+else
+	echo "No suitable Java Runtime Environment found"
+	EXITCODE=1
+fi
+log "Z/OS Connect Build Toolkit completed with exit code $EXITCODE."
+exit $EXITCODE

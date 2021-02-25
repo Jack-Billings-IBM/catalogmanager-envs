@@ -1,0 +1,27 @@
+---
+Manifest-Version: 1.0
+name: "inquireCatalog"
+provider: "CICS-1.0"
+factoryPid: "cics"
+requestSchema:
+  value: "file:///schemas/inquireCatalogRequest.json"
+  type: "JSONSchema"
+responseSchema:
+  value: "file:///schemas/inquireCatalogResponse.json"
+  type: "JSONSchema"
+providerProperties:
+- propertyName: "program"
+  value: "DFH0XCMN"
+  type: "STRING"
+- propertyName: "connectionRef"
+  value: "cicsConn"
+  type: "STRING"
+- propertyName: "dataXformType"
+  value: "WSBIND"
+  type: "STRING"
+- propertyName: "bindfile"
+  value: "files/inquireCatalog.wsbind"
+  type: "FILE"
+providerObjects: []
+version: "${currentBuild.number}"
+description: "inquireCatalog"

@@ -1,0 +1,13 @@
+
+{
+  "files": [
+    {
+      "pattern": "inquireCatalog.sar",
+      "target": "catalogmanager/services/"
+    },
+    {
+      "pattern": "inquireSingle.sar",
+      "target": "catalogmanager/services/"   
+    }
+  ]
+}

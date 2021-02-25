@@ -1,0 +1,1 @@
+{"errorMessage":"BAQR047W: The request payload under request URL http://10.1.1.2:9080/zosConnect/services/inquireCatalog could not be parsed. A JSON object format payload is expected. Error: Unexpected character 'D' on line 1, column 2."}
