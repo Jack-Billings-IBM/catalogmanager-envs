@@ -3,11 +3,11 @@
   "files": [
     {
       "pattern": "inquireCatalog.sar",
-      "target": "catalogmanager/services/"
+      "target": "catalogmanager-envs/services/"
     },
     {
       "pattern": "inquireSingle.sar",
-      "target": "catalogmanager/services/"   
+      "target": "catalogmanager-envs/services/"   
     }
   ]
 }

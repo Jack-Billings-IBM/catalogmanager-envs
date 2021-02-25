@@ -6,14 +6,14 @@ node('master') {
    stage('Checkout Git Code') { // for display purposes
       // Get some code from a GitHub repository
       println "project name is catalogTest"
-      git credentialsId: 'git', url: 'https://github.com/Jack-Billings-IBM/catalog.git'
+      git credentialsId: 'git', url: 'https://github.com/Jack-Billings-IBM/catalogmanager-envs.git'
    }
 
    stage('Rebuild zOS Connect API') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
-        sh "${WORKSPACE}/zconbt/bin/zconbt -pd=${WORKSPACE}/catalog -f=${WORKSPACE}/catalog/catalog.aar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt -pd=${WORKSPACE}/catalog -f=${WORKSPACE}/catalog.aar "
         println "Called zconbt for catalog"
         println "Exiting Stage 2, entering Stage 3!"
    }
@@ -48,25 +48,29 @@ node('master') {
        // Publish the build to Artifactory
        server.publishBuildInfo buildInfo
 
-      
-    }   
-   
-    stage("Push to GitHub") {
        sh "rm response.json"
        sh "rm responseDel.json"
        sh "rm responseStop.json"
-       sh "git config --global user.email 'jack.billings@ibm.com'"
-       sh "git config --global user.name 'Jack-Billings-IBM'"
-       sh "git add -A"
-       sh "git commit -m 'new aar file'"
-       //need to add git credentials to jenkins
-       withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
-           sh('''
-               git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
-               git push origin HEAD:master
-           ''')
-       }
-    }
+       sh "rm catalog.aar"
+      
+    }   
+   
+    // stage("Push to GitHub") {
+    //    sh "rm response.json"
+    //    sh "rm responseDel.json"
+    //    sh "rm responseStop.json"
+    //    sh "git config --global user.email 'jack.billings@ibm.com'"
+    //    sh "git config --global user.name 'Jack-Billings-IBM'"
+    //    sh "git add -A"
+    //    sh "git commit -m 'new aar file'"
+    //    //need to add git credentials to jenkins
+    //    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
+    //        sh('''
+    //            git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+    //            git push origin HEAD:master
+    //        ''')
+    //    }
+    // }
 }
 // node('nodejs') {
 //    def templateName = 'egui'
@@ -110,8 +114,8 @@ node('master') {
        println("Checking existence/status of API: "+apiName)
 
        //will be building curl commands, so saving the tail end for appending
-       def urlval = "150.238.240.73:31158/zosConnect/apis/"+apiName
-       def stopurlval = "150.238.240.73:31158/zosConnect/apis/"+apiName+"?status=stopped"
+       def urlval = "150.238.240.73:30820/zosConnect/apis/"+apiName
+       def stopurlval = "150.238.240.73:30820/zosConnect/apis/"+apiName+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
@@ -164,7 +168,7 @@ node('master') {
    def installAPI(apiFileName){
        println "Starting API deployment now"
 
-       def urlval = "150.238.240.73:31158/zosConnect/apis/"
+       def urlval = "150.238.240.73:30820/zosConnect/apis/"
        def respCode = ""
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
@@ -183,7 +187,7 @@ node('master') {
    def testAPI(serviceName) {
       println "Starting testing now"
 
-      def urlval = "150.238.240.73:31158/catalogManager/items"
+      def urlval = "150.238.240.73:30820/catalogManager/items"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'

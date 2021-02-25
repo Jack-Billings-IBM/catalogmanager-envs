@@ -8,16 +8,16 @@ node('master') {
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
       println "project name is catalog"
-      git credentialsId: 'git', url: 'https://github.com/Jack-Billings-IBM/catalog.git'
+      git credentialsId: 'git', url: 'https://github.com/Jack-Billings-IBM/catalogmanager-envs.git'
    }
 
    stage('Rebuild zOS Connect Services') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
-        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireCatalog.properties --file=${WORKSPACE}/archives/inquireCatalog.sar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/inquireCatalog/service.properties --file=${WORKSPACE}/inquireCatalog.sar "
         println "Called zconbt for inquireCatalog"
-        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/properties/inquireSingle.properties --file=${WORKSPACE}/archives/inquireSingle.sar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt --properties=${WORKSPACE}/inquireSingle/service.properties --file=${WORKSPACE}/inquireSingle.sar "
         println "Called zconbt for inquireSingle"
         println "Exiting Stage 2, entering Stage 3!"
    }
@@ -55,26 +55,31 @@ node('master') {
 
        // Publish the build to Artifactory
        server.publishBuildInfo buildInfo
-
-      
-    }
-   
-    stage("Push to GitHub") {
+       
        sh "rm response.json"
        sh "rm responseDel.json"
        sh "rm responseStop.json"
-       sh "git config --global user.email 'jack.billings@ibm.com'"
-       sh "git config --global user.name 'Jack-Billings-IBM'"
-       sh "git add -A"
-       sh "git commit -m 'new sar file'"
-       //need to add git credentials to jenkins
-       withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
-           sh('''
-               git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
-               git push origin HEAD:master
-           ''')
-       }
+       sh "rm inquireSingle.sar"
+       sh "rm inquireCatalog.sar"
+      
     }
+   
+    // stage("Push to GitHub") {
+    //    sh "rm response.json"
+    //    sh "rm responseDel.json"
+    //    sh "rm responseStop.json"
+    //    sh "git config --global user.email 'jack.billings@ibm.com'"
+    //    sh "git config --global user.name 'Jack-Billings-IBM'"
+    //    sh "git add -A"
+    //    sh "git commit -m 'new sar file'"
+    //    //need to add git credentials to jenkins
+    //    withCredentials([usernamePassword(credentialsId: 'git', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]){    
+    //        sh('''
+    //            git config --local credential.helper "!f() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; f"
+    //            git push origin HEAD:master
+    //        ''')
+    //    }
+    // }
 }
 
 
@@ -84,8 +89,8 @@ node('master') {
        println("Checking existence/status of Service name: "+service_name)
 
        //will be building curl commands, so saving the tail end for appending
-       def urlval = "150.238.240.74:31158/zosConnect/services/"+service_name
-       def stopurlval = "150.238.240.74:31158/zosConnect/services/"+service_name+"?status=stopped"
+       def urlval = "150.238.240.74:30820/zosConnect/services/"+service_name
+       def stopurlval = "150.238.240.74:30820/zosConnect/services/"+service_name+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
@@ -137,12 +142,12 @@ node('master') {
    def installSar(sarFileName){
        println "Starting sar deployment now"
 
-       def urlval = "150.238.240.74:31158/zosConnect/services/"
+       def urlval = "150.238.240.74:30820/zosConnect/services/"
        def respCode = ""
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
       //curl command spits out response code into stdout.  that's then held in respCode field to evaluate
-       def command_val = "curl -X POST -o response.json -w %{response_code} --header 'Content-Type:application/zip' --data-binary @${WORKSPACE}/archives/"+sarFileName+" --insecure "+urlval
+       def command_val = "curl -X POST -o response.json -w %{response_code} --header 'Content-Type:application/zip' --data-binary @${WORKSPACE}/"+sarFileName+" --insecure "+urlval
        respCode = sh (script: command_val, returnStdout: true)
 
        println "Service Installation Response code is: "+respCode
@@ -156,7 +161,7 @@ node('master') {
    def testServices(serviceName) {
       println "Starting testing now"
 
-      def urlval = "150.238.240.74:31158/zosConnect/services/"+serviceName+"?action=invoke"
+      def urlval = "150.238.240.74:30820/zosConnect/services/"+serviceName+"?action=invoke"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'

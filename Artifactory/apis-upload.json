@@ -2,7 +2,7 @@
   "files": [
     {
       "pattern": "catalog.aar",
-      "target": "catalogmanager/apis/"
+      "target": "catalogmanager-envs/apis/"
     }
   ]
 }
