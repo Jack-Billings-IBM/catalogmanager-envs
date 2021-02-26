@@ -5,6 +5,7 @@ node('master') {
    env.JAVA_HOME = "${jdk}"
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
+   server = "${server}"
    def services = [ "${service1}", "${service2}", "${service3}" ]
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
@@ -37,17 +38,17 @@ node('master') {
 
     stage('Deploy to z/OS Connect Server'){
        //call code to deploy the service.  passing the name of the service as a param
-       def sarFileName ="inquireSingle.sar"
-       installSar(sarFileName)
-       def sarFileName2 ="inquireCatalog.sar"
-       installSar(sarFileName2)
+       for (int i = 0; i < intNum; i++) {
+           def sarFileName = services[i]
+           installSar(sarFileName)
+        }
     }
    
     stage('Test Services') {
-       def serviceName = "inquireCatalog"
-       testServices(serviceName)
-       def serviceName2 = "inquireSingle"
-       testServices(serviceName2)
+       for (int i = 0; i < intNum; i++) {
+           def serviceName = services[i]
+           testServices(serviceName)
+        }
     }
    
     stage("Publish Artifacts to Artifactory") {
@@ -65,9 +66,10 @@ node('master') {
        sh "rm response.json"
        sh "rm responseDel.json"
        sh "rm responseStop.json"
-       sh "rm inquireSingle.sar"
-       sh "rm inquireCatalog.sar"
-      
+       for (int i = 0; i < intNum; i++) {
+           def sarFileName = services[i]
+           sh "rm "+sarFileName+".sar"
+        }      
     }
    
     // stage("Push to GitHub") {
@@ -95,8 +97,8 @@ node('master') {
        println("Checking existence/status of Service name: "+service_name)
 
        //will be building curl commands, so saving the tail end for appending
-       def urlval = "150.238.240.74:30820/zosConnect/services/"+service_name
-       def stopurlval = "150.238.240.74:30820/zosConnect/services/"+service_name+"?status=stopped"
+       def urlval = server+"/zosConnect/services/"+service_name
+       def stopurlval = server+"/zosConnect/services/"+service_name+"?status=stopped"
 
        //complete curl command will be saved in these values
        def command_val = ""
@@ -148,7 +150,7 @@ node('master') {
    def installSar(sarFileName){
        println "Starting sar deployment now"
 
-       def urlval = "150.238.240.74:30820/zosConnect/services/"
+       def urlval = server+"/zosConnect/services/"
        def respCode = ""
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
@@ -167,7 +169,7 @@ node('master') {
    def testServices(serviceName) {
       println "Starting testing now"
 
-      def urlval = "150.238.240.74:30820/zosConnect/services/"+serviceName+"?action=invoke"
+      def urlval = server+"/zosConnect/services/"+serviceName+"?action=invoke"
       def respCode = ""
       
       //def single = readJSON file: 'tests/inquireSingle_service_request.json'
