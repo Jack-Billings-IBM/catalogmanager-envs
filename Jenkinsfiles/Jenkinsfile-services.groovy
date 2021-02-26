@@ -20,7 +20,7 @@ node('master') {
         stringNum = "${number_of_services}"
         int intNum = stringNum as int  
         
-        for (int i = 1; i <= intNum; i++) {
+        for (int i = 0; i < intNum; i++) {
            println "Building service "+services[i]
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]+" -f=./"+services[i]+".sar" 
         }
