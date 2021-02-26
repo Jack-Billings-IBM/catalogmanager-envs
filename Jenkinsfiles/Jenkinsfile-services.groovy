@@ -56,12 +56,26 @@ node('master') {
        def server = Artifactory.server "artifactory"
 
        // Read the upload spec which was downloaded from github.
-       def uploadSpec = readFile 'Artifactory/services-upload.json'
-       // Upload to Artifactory.
-       def buildInfo = server.upload spec: uploadSpec
+       //def uploadSpec = readFile 'Artifactory/services-upload.json'
+       
+       for (int i = 0; i < intNum; i++) {
+          def sarFileName = services[i] 
+          def uploadSpecTest = """{
+            "files": [
+               {
+                  "pattern": """+sarFileName+""".sar",
+                  "target": """+repo+"""/services/"
+               }
+               ]
+            }"""
+                  // Upload to Artifactory.
+            def buildInfo = server.upload spec: uploadSpecTest
 
-       // Publish the build to Artifactory
-       server.publishBuildInfo buildInfo
+            // Publish the build to Artifactory
+            server.publishBuildInfo buildInfo
+        }    
+       
+
        
        sh "rm response.json"
        sh "rm responseDel.json"
