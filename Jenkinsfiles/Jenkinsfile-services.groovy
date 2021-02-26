@@ -5,6 +5,10 @@ node('master') {
    env.JAVA_HOME = "${jdk}"
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
+   def services = [ "${service1}", "${service2}", "${service3}" ]
+   stringNum = "${number_of_services}"
+   int intNum = stringNum as int  
+   
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
       println "project name is catalog"
@@ -15,10 +19,6 @@ node('master') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
-      
-        def services = [ "${service1}", "${service2}", "${service3}" ]
-        stringNum = "${number_of_services}"
-        int intNum = stringNum as int  
         
         for (int i = 0; i < intNum; i++) {
            println "Building service "+services[i]
@@ -28,11 +28,12 @@ node('master') {
    }
    stage('Check for and Handle Existing Services') {
        println "Going to stop and remove existing service from zOS Connect Server if required"
-       def resp = stopAndDeleteRunningService("inquireSingle")
-       def resp2 = stopAndDeleteRunningService("inquireCatalog")
-       println "Cleared the field for service deploy: "+resp
-       println "Cleared the field for service deploy: "+resp2
-       }
+       for (int i = 0; i < intNum; i++) {
+           def service = services[i]
+           def resp = stopAndDeleteRunningService(service)
+           println "Cleared the field for service deploy: "+resp
+        }
+    }
 
     stage('Deploy to z/OS Connect Server'){
        //call code to deploy the service.  passing the name of the service as a param
