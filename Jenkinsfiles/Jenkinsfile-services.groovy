@@ -13,8 +13,8 @@ node('master') {
 
    stage('Rebuild zOS Connect Services') {
         int expectedInt = 2
-        stringNum = ${number_of_services}
-        int intNum = stringNum.toInteger()    
+        stringNum = "${number_of_services}"
+        int intNum = stringNum as int  
         
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
