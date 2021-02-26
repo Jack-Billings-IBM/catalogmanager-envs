@@ -24,11 +24,8 @@ node('master') {
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
       
-      println stringNum.getClass()   // class java.util.ArrayList
- 
-      println (stringNum instanceof Int)   
         
-        for (i = 1; i < stringNum; i++) {
+        for (i = 1; i < 3; i++) {
            println = "Building service ${obj[it]}"
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
