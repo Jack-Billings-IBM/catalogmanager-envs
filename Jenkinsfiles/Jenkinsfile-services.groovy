@@ -20,7 +20,7 @@ node('master') {
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
         
-        for (i = 0; i < ${number_of_services}; i++) {
+        for (i = 1; i < ${number_of_services}; i++) {
            println = "Building service ${obj[i]}"
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
