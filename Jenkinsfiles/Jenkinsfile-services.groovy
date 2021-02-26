@@ -15,9 +15,9 @@ node('master') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
-        sh "${WORKSPACE}/zconbt/bin/zconbt -pd=${WORKSPACE}/inquireCatalog --file=${WORKSPACE}/inquireCatalog.sar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt -p=inquireSingle/service2.properties -f=inquireSingle.sar "
         println "Called zconbt for inquireCatalog"
-        sh "${WORKSPACE}/zconbt/bin/zconbt --pd=${WORKSPACE}/inquireSingle --file=${WORKSPACE}/inquireSingle.sar "
+        sh "${WORKSPACE}/zconbt/bin/zconbt -p=inquireCatalog/service2.properties -f=inquireCatalog.sar "
         println "Called zconbt for inquireSingle"
         println "Exiting Stage 2, entering Stage 3!"
    }
