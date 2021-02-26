@@ -63,8 +63,8 @@ node('master') {
           def uploadSpecTest = """{
             "files": [
                {
-                  "pattern": """""+sarFileName+""".sar",
-                  "target": """""+repo+"""/services/"
+                  "pattern": """+sarFileName+"""".sar"",
+                  "target": """+repo+""""/services/""
                }
                ]
             }"""
@@ -75,7 +75,6 @@ node('master') {
             server.publishBuildInfo buildInfo
         }    
        
-
        
        sh "rm response.json"
        sh "rm responseDel.json"
