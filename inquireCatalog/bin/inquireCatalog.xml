@@ -78,4 +78,6 @@
     <omitOutputEmptyTags>false</omitOutputEmptyTags>
     <enforceMinArrayOccurrence>false</enforceMinArrayOccurrence>
     <enforceMinArrayOccurrenceResponse>false</enforceMinArrayOccurrenceResponse>
+    <ldsStartsWithLLZZTRANCODE>false</ldsStartsWithLLZZTRANCODE>
+    <ldsStartsWithLLZZ>false</ldsStartsWithLLZZ>
 </service>

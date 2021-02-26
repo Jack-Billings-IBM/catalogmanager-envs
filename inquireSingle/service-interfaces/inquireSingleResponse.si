@@ -104,7 +104,7 @@
                             </marshaller>
                             <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
                         </field>
-                        <field name="ON_SNGL_ORDER" originalName="ON_SNGL_ORDER" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.ON_SNGL_ORDER">
+                        <field name="ON_SNGL_ORDER" originalName="ON_SNGL_ORDER" included="N" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.ON_SNGL_ORDER">
                             <startPos>156</startPos>
                             <bytes>3</bytes>
                             <maxBytes>3</maxBytes>

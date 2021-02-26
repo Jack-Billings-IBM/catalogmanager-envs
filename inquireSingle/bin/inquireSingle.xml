@@ -52,7 +52,7 @@
 <field included="Y" fieldName="CA_SNGL_DEPARTMENT"/>
 <field included="Y" fieldName="CA_SNGL_COST"/>
 <field included="Y" fieldName="IN_SNGL_STOCK"/>
-<field included="Y" fieldName="ON_SNGL_ORDER"/>
+<field included="N" fieldName="ON_SNGL_ORDER"/>
                             </field>
                         </field>
                     </interfaceField>
@@ -76,4 +76,6 @@
     <omitOutputEmptyTags>false</omitOutputEmptyTags>
     <enforceMinArrayOccurrence>false</enforceMinArrayOccurrence>
     <enforceMinArrayOccurrenceResponse>false</enforceMinArrayOccurrenceResponse>
+    <ldsStartsWithLLZZTRANCODE>false</ldsStartsWithLLZZTRANCODE>
+    <ldsStartsWithLLZZ>false</ldsStartsWithLLZZ>
 </service>
