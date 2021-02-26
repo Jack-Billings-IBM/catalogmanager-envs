@@ -21,7 +21,7 @@ node('master') {
         fieldNames.each { println "Gimme the value ${obj[it]}" }
         
         for (i = 1; i < "${number_of_services}"; i++) {
-           println = "Building service ${obj[i]}"
+           println = "Building service ${obj[it]}"
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
         sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar "
