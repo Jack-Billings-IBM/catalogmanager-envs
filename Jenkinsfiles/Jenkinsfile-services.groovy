@@ -14,9 +14,7 @@ node('master') {
    stage('Rebuild zOS Connect Services') {
         int expectedInt = 2
       stringNum = "${number_of_services}"
-        int intNum = stringNum.toInteger()
-
-        assertEquals(intNum, expectedInt)     
+        int intNum = stringNum.toInteger()    
         
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
@@ -26,7 +24,7 @@ node('master') {
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
         
-        for (i = 1; i < ${number_of_services}; i++) {
+        for (i = 1; i < stringNum; i++) {
            println = "Building service ${obj[it]}"
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
