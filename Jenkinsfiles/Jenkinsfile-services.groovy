@@ -12,29 +12,20 @@ node('master') {
    }
 
    stage('Rebuild zOS Connect Services') {
-        int expectedInt = 2
-        stringNum = "${number_of_services}"
-        int intNum = stringNum as int  
-        
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
       
-      
         def services = [ "${service1}", "${service2}", "${service3}" ]
-        
-        num = 3
+        stringNum = "${number_of_services}"
+        int intNum = stringNum as int  
         
         for (int i = 1; i <= intNum; i++) {
            println services[i] 
            println(i)
-           println "Building service"+services[i]
-           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
+           println "Building service "+services[i]
+           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]" -f=./"+services[i]".sar " 
         }
-        sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar "
-        println "Called zconbt for inquireCatalog"
-        sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireCatalog -f=./inquireCatalog.sar "
-        println "Called zconbt for inquireSingle"
         println "Exiting Stage 2, entering Stage 3!"
    }
    stage('Check for and Handle Existing Services') {
