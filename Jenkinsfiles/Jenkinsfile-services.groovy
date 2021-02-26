@@ -19,11 +19,11 @@ node('master') {
         def obj = [ "1": "${service1}", "2": "${service2}", "3": "${service3}" ]
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
-       // for (i = 0; i < ${number_of_services}; i++) {
-         //  println = "${service${number_of_services}}"
-        //   sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
-        //   System.out.println("Hello World")
-       // }
+        
+        for (i = 0; i < ${number_of_services}; i++) {
+           println = "Building service ${obj[i]}"
+           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
+        }
         sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar "
         println "Called zconbt for inquireCatalog"
         sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireCatalog -f=./inquireCatalog.sar "
