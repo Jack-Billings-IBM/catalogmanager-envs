@@ -20,20 +20,15 @@ node('master') {
         def output = sh (returnStdout: true, script: 'pwd')
         println output
       
-        def obj = [ "1": "${service1}", "2": "${service2}", "3": "${service3}" ]
-        def fieldNames = ["1", "2", "3"]
-        fieldNames.each { println "Gimme the value ${obj[it]}" }
-        println "Gimme the value ${obj[fieldNames]}"
       
         def services = [ "${service1}", "${service2}", "${service3}" ]
         
         num = 3
         
-        for (int i = 1; i < intNum; i++) {
+        for (int i = 1; i <= intNum; i++) {
            println services[i] 
            println(i)
-           i.toString()
-           println "Building service ${obj[i]}"
+           println "Building service"+services[i]
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
         sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar "
