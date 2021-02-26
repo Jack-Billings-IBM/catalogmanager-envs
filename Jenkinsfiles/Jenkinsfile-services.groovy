@@ -30,7 +30,7 @@ node('master') {
         num = 3
         
         for (int i = 1; i < intNum; i++) {
-           println(services[i])
+           println services[i] 
            println(i)
            i.toString()
            println "Building service ${obj[i]}"
