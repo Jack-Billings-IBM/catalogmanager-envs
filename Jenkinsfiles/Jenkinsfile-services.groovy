@@ -13,9 +13,12 @@ node('master') {
 
    stage('Rebuild zOS Connect Services') {
         println "Calling zconbt"
-        echo "${service${number_of_services}}"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
+      
+        def obj = [ "1": "${service1}", "2": "${service2}", "3": "${service3}" ]
+        def fieldNames = ["1", "2", "3"]
+        fieldNames.each { println "Gimme the value ${obj[it]}" }
        // for (i = 0; i < ${number_of_services}; i++) {
          //  println = "${service${number_of_services}}"
         //   sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
