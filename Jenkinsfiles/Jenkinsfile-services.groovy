@@ -13,7 +13,7 @@ node('master') {
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
       println "project name is catalog"
-      git credentialsId: 'git', url: '${git_url}.git'
+      git credentialsId: 'git', url: '${git_url}'
    }
 
    stage('Rebuild zOS Connect Services') {
