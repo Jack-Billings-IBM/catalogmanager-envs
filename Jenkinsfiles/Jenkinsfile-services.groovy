@@ -23,9 +23,10 @@ node('master') {
         def obj = [ "1": "${service1}", "2": "${service2}", "3": "${service3}" ]
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
-      
         
-        for (i = 1; i < 3; i++) {
+        num = 3
+        
+        for (i = 1; i < num; i++) {
            println = "Building service ${obj[it]}"
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
