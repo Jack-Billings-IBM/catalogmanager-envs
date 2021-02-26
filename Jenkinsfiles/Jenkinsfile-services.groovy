@@ -23,6 +23,10 @@ node('master') {
         def obj = [ "1": "${service1}", "2": "${service2}", "3": "${service3}" ]
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
+      
+      println stringNum.getClass()   // class java.util.ArrayList
+ 
+      println (stringNum instanceof Int)   
         
         for (i = 1; i < stringNum; i++) {
            println = "Building service ${obj[it]}"
