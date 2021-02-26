@@ -7,13 +7,13 @@ node('master') {
    
    server = "${server}"
    def services = [ "${service1}", "${service2}", "${service3}" ]
-   stringNum = "${number-of-services}"
+   stringNum = "${number_of_services}"
    int intNum = stringNum as int  
    
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
       println "project name is catalog"
-      git credentialsId: 'git', url: '${git-url}'
+      git credentialsId: 'git', url: '${git_url}'
    }
 
    stage('Rebuild zOS Connect Services') {
@@ -62,7 +62,7 @@ node('master') {
             "files": [
                {
                   "pattern": "${sarFileName}.sar",
-                  "target": "${repo-name}/services/"
+                  "target": "${repo_name}/services/"
                }
                ]
             }"""
