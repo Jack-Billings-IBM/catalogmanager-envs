@@ -13,7 +13,7 @@ node('master') {
 
    stage('Rebuild zOS Connect Services') {
         println "Calling zconbt"
-        echo "${service1}"
+        echo "${service${number_of_services}}"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
        // for (i = 0; i < ${number_of_services}; i++) {
