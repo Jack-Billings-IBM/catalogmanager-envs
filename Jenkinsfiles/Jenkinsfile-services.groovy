@@ -28,7 +28,7 @@ node('master') {
         
         for (int i = 1; i < intNum; i++) {
            println(i)
-           println = "Building service ${obj[i]}"
+           println = "Building service ${obj["i"]}"
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar " 
         }
         sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./inquireSingle -f=./inquireSingle.sar "
