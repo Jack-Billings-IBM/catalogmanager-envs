@@ -57,15 +57,14 @@ node('master') {
 
        // Read the upload spec which was downloaded from github.
        //def uploadSpec = readFile 'Artifactory/services-upload.json'
-       println "pattern": ""${repo}".sar"
-       println "pattern": "+sar+"".sar"
+       println "${repo}.sar"
        for (int i = 0; i < intNum; i++) {
           def sarFileName = services[i] 
           def uploadSpecTest = """{
             "files": [
                {
-                  "pattern": """+sarFileName+""".sar",
-                  "target": """+repo+"""/services/"
+                  "pattern": "${sarFileName}.sar",
+                  "target": "${repo}/services/"
                }
                ]
             }"""
