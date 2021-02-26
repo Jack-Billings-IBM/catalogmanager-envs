@@ -21,10 +21,8 @@ node('master') {
         int intNum = stringNum as int  
         
         for (int i = 1; i <= intNum; i++) {
-           println services[i] 
-           println(i)
            println "Building service "+services[i]
-           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]" -f=./"+services[i]".sar " 
+           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i] " -f=./"+services[i]".sar" 
         }
         println "Exiting Stage 2, entering Stage 3!"
    }
