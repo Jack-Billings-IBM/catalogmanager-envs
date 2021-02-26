@@ -13,7 +13,7 @@ node('master') {
 
    stage('Rebuild zOS Connect Services') {
         int expectedInt = 2
-      stringNum = "${number_of_services}"
+        stringNum = ${number_of_services}
         int intNum = stringNum.toInteger()    
         
         println "Calling zconbt"
