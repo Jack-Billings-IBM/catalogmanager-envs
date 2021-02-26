@@ -24,10 +24,13 @@ node('master') {
         def fieldNames = ["1", "2", "3"]
         fieldNames.each { println "Gimme the value ${obj[it]}" }
         println "Gimme the value ${obj[fieldNames]}"
+      
+        services = [ "${service1}", "${service2}", "${service3} ]
         
         num = 3
         
         for (int i = 1; i < intNum; i++) {
+           println(services[i])
            println(i)
            i.toString()
            println "Building service ${obj[i]}"
