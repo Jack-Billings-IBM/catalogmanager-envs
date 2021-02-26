@@ -25,7 +25,7 @@ node('master') {
         fieldNames.each { println "Gimme the value ${obj[it]}" }
         println "Gimme the value ${obj[fieldNames]}"
       
-        def services = [ "${service1}", "${service2}", "${service3} ]
+        def services = [ "${service1}", "${service2}", "${service3}" ]
         
         num = 3
         
