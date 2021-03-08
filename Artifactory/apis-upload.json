@@ -1,8 +1,0 @@
-{
-  "files": [
-    {
-      "pattern": "catalog.aar",
-      "target": "catalogmanager-envs/apis/"
-    }
-  ]
-}
