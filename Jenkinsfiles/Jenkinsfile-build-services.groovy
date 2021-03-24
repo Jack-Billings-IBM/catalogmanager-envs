@@ -53,8 +53,9 @@ node('master') {
     }
    
    stage("test reading file names") {
-      sh "ls > listJsonFiles"
-      def files = readFile( "listJsonFiles" ).split( "\\r?\\n" );
+      sh "ls > folders"
+      sh "cat folders"
+      def files = readFile( "folders" ).split( "\\r?\\n" );
       sh "rm -f listJsonFiles"
    }
    
