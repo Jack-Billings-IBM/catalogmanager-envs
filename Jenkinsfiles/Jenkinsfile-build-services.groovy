@@ -15,9 +15,13 @@ node('master') {
    }
    
    stage("test reading file names") {
+      //sh "ls > folders"
+      File file = new File("folders")
       sh "ls > folders"
       sh "cat folders"
-      def files = readFile( "folders" ).split( "\\r?\\n" );
+      (file as List).each {
+        println it.split(' ')
+      }
       sh "cat folders"
       sh "rm -f folders"
    }
