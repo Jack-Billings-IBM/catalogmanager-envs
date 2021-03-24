@@ -54,7 +54,6 @@ node('master') {
    
    stage("test reading file names") {
       FILES_DIR = './foo'
-      cleanWs()
 
        sh """
            mkdir foo
