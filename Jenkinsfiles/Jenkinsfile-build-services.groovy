@@ -1,5 +1,3 @@
-import static groovy.io.FileType.FILES
-
 node('master') {
    jdk = tool name: 'JDK8'
    env.JAVA_HOME = "${jdk}"
@@ -14,6 +12,21 @@ node('master') {
       // Get some code from a GitHub repository
       println "project name is catalog"
       git credentialsId: 'git', url: '${git_url}'
+   }
+   
+   stage("test reading file names") {
+      sh "ls > folders"
+      sh "cat folders"
+      def words = []
+      new File( 'folders' ).eachLine { line ->
+         words << line
+      }
+      // print them out
+      words.each {
+         println it
+      }
+      def files = readFile( "folders" ).split( "\\r?\\n" );
+      sh "rm -f folders"
    }
 
    stage('Build zOS Connect Services') {
@@ -51,12 +64,5 @@ node('master') {
             server.publishBuildInfo buildInfo
         }         
     }
-   
-   stage("test reading file names") {
-      sh "ls > folders"
-      sh "cat folders"
-      def files = readFile( "folders" ).split( "\\r?\\n" );
-      sh "rm -f listJsonFiles"
-   }
    
 }
