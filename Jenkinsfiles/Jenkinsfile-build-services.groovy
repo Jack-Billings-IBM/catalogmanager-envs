@@ -1,4 +1,4 @@
-
+import static groovy.io.FileType.FILES
 
 node('master') {
    jdk = tool name: 'JDK8'
@@ -53,20 +53,26 @@ node('master') {
     }
    
    stage("test reading file names") {
-      def listfiles(dir) {
-         dlist = []
-         flist = []
-         new File(dir).eachDir {dlist << it.name }
-         dlist.sort()
-         new File(dir).eachFile(FileType.FILES, {flist << it.name })
-         flist.sort()
-         return (dlist << flist).flatten()
-      }
+      FILES_DIR = './foo'
+      cleanWs()
 
-      fs = listfiles(".")
-      fs.each {
-         println it
-      }
+       sh """
+           mkdir foo
+           touch foo/bar1
+           touch foo/bar2
+           touch foo/bar3
+       """
+
+       def filenames = [];
+       def dir = new File("${env.WORKSPACE}/${FILES_DIR}");
+       dir.traverse(type: FILES, maxDepth: 0) {
+           filenames.add(it.getName())
+       }
+
+       for (int i = 0; i < filenames.size(); i++) {
+           def filename = filenames[i]
+           echo "${filename}"
+       }
    }
    
 }
