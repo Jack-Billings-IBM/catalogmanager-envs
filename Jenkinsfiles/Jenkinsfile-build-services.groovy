@@ -53,11 +53,7 @@ node('master') {
     }
    
    stage("test reading file names") {
-      new File('.').eachFileRecurse(FILES) {
-         if(it.name.endsWith('.groovy')) {
-            println it
-         }
-      }
+      def files = findFiles(glob: '**/TEST-*.xml') echo """${files[0].name} ${files[0].path} ${files[0].directory} ${files[0].length} ${files[0].lastModified}"""
    }
    
 }
