@@ -19,9 +19,6 @@ node('master') {
       File file = new File("folders")
       sh "ls > folders"
       sh "cat folders"
-      (file as List).each {
-        println it.split(' ')
-      }
       sh "cat folders"
       sh "rm -f folders"
    }
