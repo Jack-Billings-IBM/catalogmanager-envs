@@ -1,3 +1,5 @@
+import static groovy.io.FileType.FILES
+
 node('master') {
    jdk = tool name: 'JDK8'
    env.JAVA_HOME = "${jdk}"
@@ -51,8 +53,6 @@ node('master') {
     }
    
    stage("test reading file names") {
-      import static groovy.io.FileType.FILES
-
       new File('.').eachFileRecurse(FILES) {
          if(it.name.endsWith('.groovy')) {
             println it
