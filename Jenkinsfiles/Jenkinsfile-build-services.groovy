@@ -15,8 +15,16 @@ node('master') {
    }
    
    stage("test reading file names") {
+      def words = []
+      new File( 'words.txt' ).eachLine { line ->
+         words << line
+      }
+
+      // print them out
+      words.each {
+         println it
+      }
       //sh "ls > folders"
-      File file = new File("folders")
       sh "ls > folders"
       sh "cat folders"
       sh "cat folders"
