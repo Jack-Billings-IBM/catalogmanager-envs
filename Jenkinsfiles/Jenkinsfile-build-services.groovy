@@ -17,15 +17,8 @@ node('master') {
    stage("test reading file names") {
       sh "ls > folders"
       sh "cat folders"
-      def words = []
-      new File( 'folders' ).eachLine { line ->
-         words << line
-      }
-      // print them out
-      words.each {
-         println it
-      }
       def files = readFile( "folders" ).split( "\\r?\\n" );
+      sh "cat folders"
       sh "rm -f folders"
    }
 
