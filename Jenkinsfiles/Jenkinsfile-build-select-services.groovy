@@ -35,7 +35,7 @@ node('master') {
           def uploadSpecTest = """{
             "files": [
                {
-                  "pattern": "services/${sarFileName}.sar",
+                  "pattern": "${sarFileName}.sar",
                   "target": "${repo_name}/services/"
                }
                ]
