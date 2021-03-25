@@ -16,8 +16,8 @@ node('master') {
        def downloadSpec = """{
          "files": [
             {
-               "pattern": "*.sar",
-               "target": "${artifactory_repo_name}/services/"
+               "pattern": "${artifactory_repo_name}/services/*.sar",
+               "target": "services/"
             }
             ]
          }"""
