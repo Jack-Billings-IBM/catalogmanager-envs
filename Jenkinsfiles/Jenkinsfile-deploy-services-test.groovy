@@ -45,7 +45,7 @@ node('master') {
               //determine how many services
               int intNum = artifacts.size()
               println "The length of the array is: " + intNum
-
+         }
       
    }
    
