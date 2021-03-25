@@ -21,8 +21,9 @@ node('master') {
       sh "cat folders"
       def data = readFile(file: 'folders')
       println(data)
-      sh "cat folders"
-      sh "rm -f folders"
+      data.each { String line ->
+         println line
+      }
    }
 
    stage('Build zOS Connect Services') {
