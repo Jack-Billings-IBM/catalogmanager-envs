@@ -15,7 +15,7 @@ node('master') {
    }
    
    stage("test reading file names") {
-      
+      def services = []
       //sh "ls > folders"
       sh "ls > folders"
       sh "cat folders"
@@ -24,6 +24,11 @@ node('master') {
       data.eachLine { String line ->
          println line
       }
+      def lines = data.readLines()
+      for (line in lines) {
+         services.add(line)
+      }
+      
    }
 
    stage('Build zOS Connect Services') {
