@@ -9,7 +9,7 @@ node('master') {
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
       // need to define git credentials
-      //git credentialsId: 'git', url: '${git_url}'
+      git credentialsId: 'git', url: '${git_url}'
    }
 
 
