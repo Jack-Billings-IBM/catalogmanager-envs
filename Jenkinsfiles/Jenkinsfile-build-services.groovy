@@ -17,13 +17,13 @@ node('master') {
    
    stage("test reading file names") {
       dir("services") {
+         sh "rm services"
          sh "ls"
          sh "ls | tee services"
          sh "cat services"
          def data = readFile(file: 'services')
          def lines = data.readLines()
          for (line in lines) {
-            
             services.add(line)
          }
          println "${services}"
