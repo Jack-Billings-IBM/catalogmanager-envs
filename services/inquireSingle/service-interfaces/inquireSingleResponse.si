@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:message xmlns:ns2="http://www.ibm.com/ims/Transaction" transactionCode="" messageName="inquireSingleResponse" direction="0" serviceType="CICS_COMM_AREA">
+    <message id="1" name="inquireSingleResponse">
+        <segment id="1" name="COMMAREA" originalName="COMMAREA">
+            <field name="DFH0XCP4" originalName="DFH0XCP4" included="Y" path="DFH0XCP4">
+                <startPos>1</startPos>
+                <bytes>158</bytes>
+                <maxBytes>158</maxBytes>
+                <applicationDatatype datatype="STRUCT"/>
+                <field name="CA_SINGLE_REQUEST_ID" originalName="CA_SINGLE_REQUEST_ID" included="N" path="DFH0XCP4.CA_SINGLE_REQUEST_ID">
+                    <startPos>1</startPos>
+                    <bytes>6</bytes>
+                    <maxBytes>6</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="CA_SINGLE_RETURN_CODE" originalName="CA_SINGLE_RETURN_CODE" included="Y" path="DFH0XCP4.CA_SINGLE_RETURN_CODE">
+                    <startPos>7</startPos>
+                    <bytes>2</bytes>
+                    <maxBytes>2</maxBytes>
+                    <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                        <typeConverter>ZONEDDECIMAL</typeConverter>
+                    </marshaller>
+                    <applicationDatatype datatype="DECIMAL" precision="2" scale="0"/>
+                </field>
+                <field name="CA_SINGLE_RESPONSE_MESSAGE" originalName="CA_SINGLE_RESPONSE_MESSAGE" included="Y" path="DFH0XCP4.CA_SINGLE_RESPONSE_MESSAGE">
+                    <startPos>9</startPos>
+                    <bytes>79</bytes>
+                    <maxBytes>79</maxBytes>
+                    <applicationDatatype datatype="CHAR"/>
+                </field>
+                <field name="CA_INQUIRE_SINGLE" originalName="CA_INQUIRE_SINGLE" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE">
+                    <startPos>88</startPos>
+                    <bytes>71</bytes>
+                    <maxBytes>71</maxBytes>
+                    <applicationDatatype datatype="STRUCT"/>
+                    <field name="CA_ITEM_REF_REQ" originalName="CA_ITEM_REF_REQ" included="N" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_ITEM_REF_REQ">
+                        <startPos>88</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                    <field name="FILL_0" originalName="FILL_0" included="N" path="DFH0XCP4.CA_INQUIRE_SINGLE.FILL_0">
+                        <startPos>92</startPos>
+                        <bytes>4</bytes>
+                        <maxBytes>4</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                    </field>
+                    <field name="FILL_1" originalName="FILL_1" included="N" path="DFH0XCP4.CA_INQUIRE_SINGLE.FILL_1">
+                        <startPos>96</startPos>
+                        <bytes>3</bytes>
+                        <maxBytes>3</maxBytes>
+                        <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+                            <typeConverter>ZONEDDECIMAL</typeConverter>
+                        </marshaller>
+                        <applicationDatatype datatype="DECIMAL" precision="3" scale="0"/>
+                    </field>
+                    <field name="CA_SINGLE_ITEM" originalName="CA_SINGLE_ITEM" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM">
+                        <startPos>99</startPos>
+                        <bytes>60</bytes>
+                        <maxBytes>60</maxBytes>
+                        <applicationDatatype datatype="STRUCT"/>
+                        <field name="CA_SNGL_ITEM_REF" originalName="CA_SNGL_ITEM_REF" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.CA_SNGL_ITEM_REF">
+                            <startPos>99</startPos>
+                            <bytes>4</bytes>
+                            <maxBytes>4</maxBytes>
+                            <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+<typeConverter>ZONEDDECIMAL</typeConverter>
+                            </marshaller>
+                            <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                        </field>
+                        <field name="CA_SNGL_DESCRIPTION" originalName="CA_SNGL_DESCRIPTION" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.CA_SNGL_DESCRIPTION">
+                            <startPos>103</startPos>
+                            <bytes>40</bytes>
+                            <maxBytes>40</maxBytes>
+                            <applicationDatatype datatype="CHAR"/>
+                        </field>
+                        <field name="CA_SNGL_DEPARTMENT" originalName="CA_SNGL_DEPARTMENT" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.CA_SNGL_DEPARTMENT">
+                            <startPos>143</startPos>
+                            <bytes>3</bytes>
+                            <maxBytes>3</maxBytes>
+                            <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+<typeConverter>ZONEDDECIMAL</typeConverter>
+                            </marshaller>
+                            <applicationDatatype datatype="DECIMAL" precision="3" scale="0"/>
+                        </field>
+                        <field name="CA_SNGL_COST" originalName="CA_SNGL_COST" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.CA_SNGL_COST">
+                            <startPos>146</startPos>
+                            <bytes>6</bytes>
+                            <maxBytes>6</maxBytes>
+                            <applicationDatatype datatype="CHAR"/>
+                        </field>
+                        <field name="IN_SNGL_STOCK" originalName="IN_SNGL_STOCK" included="Y" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.IN_SNGL_STOCK">
+                            <startPos>152</startPos>
+                            <bytes>4</bytes>
+                            <maxBytes>4</maxBytes>
+                            <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+<typeConverter>ZONEDDECIMAL</typeConverter>
+                            </marshaller>
+                            <applicationDatatype datatype="DECIMAL" precision="4" scale="0"/>
+                        </field>
+                        <field name="ON_SNGL_ORDER" originalName="ON_SNGL_ORDER" included="N" path="DFH0XCP4.CA_INQUIRE_SINGLE.CA_SINGLE_ITEM.ON_SNGL_ORDER">
+                            <startPos>156</startPos>
+                            <bytes>3</bytes>
+                            <maxBytes>3</maxBytes>
+                            <marshaller isSigned="N" isSignLeading="N" isSignSeparate="N" isWCHAROnly="N">
+<typeConverter>ZONEDDECIMAL</typeConverter>
+                            </marshaller>
+                            <applicationDatatype datatype="DECIMAL" precision="3" scale="0"/>
+                        </field>
+                    </field>
+                </field>
+            </field>
+        </segment>
+    </message>
+</ns2:message>
