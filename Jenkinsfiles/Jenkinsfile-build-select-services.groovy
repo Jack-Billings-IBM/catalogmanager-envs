@@ -19,7 +19,7 @@ node('master') {
         
         for (int i = 0; i < intNum; i++) {
            println "Building service "+services[i]
-           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./services/"+services[i]+" -f=./services/"+services[i]+".sar" 
+           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./services/"+services[i]+" -f=./"+services[i]+".sar" 
         }
         println "Exiting Stage 2, entering Stage 3!"
    }
