@@ -5,7 +5,7 @@ node('master') {
    
    server = "${server}"
    //def services = [ "${service1}", "${service2}", "${service3}" ]
-   def artifacts = []
+   def services = []
    int intNum = 0
    
 
@@ -39,12 +39,12 @@ node('master') {
               def data = readFile(file: 'artifacts')
               def lines = data.readLines()
               for (line in lines) {
-                 artifacts.add(line)
+                 services.add(line)
               }
               //display all the services
-              println "${artifacts}"
+              println "${services}"
               //determine how many services
-              intNum = artifacts.size()
+              intNum = services.size()
               println "The length of the array is: " + intNum
               sh "rm *.sar"
          }
