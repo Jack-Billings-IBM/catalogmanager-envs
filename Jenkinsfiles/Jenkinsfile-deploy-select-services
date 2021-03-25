@@ -1,8 +1,0 @@
-node('master') {
-   jdk = tool name: 'JDK8'
-   env.JAVA_HOME = "${jdk}"
-   env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
-   
-   def services = [ "${service1}", "${service2}"]
-   stringNum = "${number_of_services}"
-   int intNum = stringNum as int  
