@@ -5,7 +5,7 @@ node('master') {
    
    def services = []
    stringNum = "${number_of_services}"
-   int intNum = stringNum as int  
+   //int intNum = stringNum as int  
    
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
@@ -29,8 +29,8 @@ node('master') {
               services.add(line)
            }
            println "${services}"
-           def arrayLength = services.size()
-           println "The length of the array is: " + arrayLength
+           int intNum = services.size()
+           println "The length of the array is: " + intNum
 
            for (int i = 0; i < intNum; i++) {
               println "Building service "+services[i]
