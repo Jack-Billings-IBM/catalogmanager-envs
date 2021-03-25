@@ -5,7 +5,6 @@ node('master') {
    
    def services = []
    stringNum = "${number_of_services}"
-   //int intNum = stringNum as int  
    
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
@@ -46,7 +45,10 @@ node('master') {
        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
        // need to define artifactory server
        def server = Artifactory.server "artifactory"
-
+       
+       int intNum = services.size()
+       println "The length of the array is: " + intNum
+       
        // Read the upload spec which was downloaded from github.
        for (int i = 0; i < intNum; i++) {
           def sarFileName = services[i] 
