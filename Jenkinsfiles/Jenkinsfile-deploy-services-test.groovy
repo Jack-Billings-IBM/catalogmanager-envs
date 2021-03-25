@@ -26,7 +26,7 @@ node('master') {
          sh "pwd"
          sh "ls"
       
-         dir("services/artifacts") {
+         dir("artifacts/") {
               sh "pwd"
               sh "ls"
               //read contents of services folder into services file
