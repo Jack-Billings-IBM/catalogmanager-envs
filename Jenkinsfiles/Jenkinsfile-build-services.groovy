@@ -29,7 +29,9 @@ node('master') {
               services.add(line)
            }
            println "${services}"
-           println(services.size)
+           def arrayLength = services.size()
+           println "The length of the array is: " + arrayLength
+
            for (int i = 0; i < intNum; i++) {
               println "Building service "+services[i]
               sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]+" -f=./"+services[i]+".sar" 
