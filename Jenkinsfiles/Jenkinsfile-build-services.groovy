@@ -19,7 +19,7 @@ node('master') {
       dir("services") {
          sh "rm services"
          sh "ls"
-         sh "ls | tee services"
+         sh "ls | grep -vx 'services' > services"
          sh "cat services"
          def data = readFile(file: 'services')
          def lines = data.readLines()
