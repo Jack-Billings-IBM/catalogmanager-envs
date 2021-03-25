@@ -14,28 +14,25 @@ node('master') {
       println "project name is catalog"
       git credentialsId: 'git', url: '${git_url}'
    }
-   
-   stage("test reading file names") {
-      dir("services") {
-         sh "rm services"
-         sh "ls"
-         sh "ls | grep -vx 'services' > services"
-         sh "cat services"
-         def data = readFile(file: 'services')
-         def lines = data.readLines()
-         for (line in lines) {
-            services.add(line)
-         }
-         println "${services}"
-      }
-      
-   }
+
 
    stage('Build zOS Connect Services') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
         
+        dir("services") {
+           sh "ls"
+           sh "ls | grep -vx 'services' > services"
+           sh "cat services"
+           def data = readFile(file: 'services')
+           def lines = data.readLines()
+           for (line in lines) {
+              services.add(line)
+           }
+           println "${services}"
+        }
+      
         for (int i = 0; i < intNum; i++) {
            println "Building service "+services[i]
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]+" -f=./"+services[i]+".sar" 
