@@ -130,7 +130,7 @@ node('master') {
        }
    }
 
-   def installAPI(aarFileName){
+   def installAar(aarFileName){
        println "Starting aar deployment now"
 
        def urlval = server+"/zosConnect/apis/"
