@@ -34,7 +34,7 @@ node('master') {
               def data = readFile(file: 'artifacts')
               def lines = data.readLines()
               for (line in lines) {
-                 sh "${line%????}"
+                 line = ${line%????}
                  services.add(line)
               }
 
