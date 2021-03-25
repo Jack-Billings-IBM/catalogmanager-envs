@@ -4,6 +4,7 @@ node('master') {
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
    server = "${server}"
+   def sars = []
    def services = []
    int intNum = 0
    
@@ -34,14 +35,15 @@ node('master') {
               def data = readFile(file: 'artifacts')
               def lines = data.readLines()
               for (line in lines) {
+                 sars.add(line)
                  line = line[0..<line.lastIndexOf('.')]
                  services.add(line)
               }
 
               println "Display sar files that will be uploaded to server"
-              println "${services}"
+              println "${sars}"
               //determine how many services
-              intNum = services.size()
+              intNum = sars.size()
               println "The number of services being deployed is: " + intNum
 
          }
@@ -60,7 +62,7 @@ node('master') {
     stage('Deploy to z/OS Connect Server'){
        //call code to deploy the service.  passing the name of the service as a param
        for (int i = 0; i < intNum; i++) {
-           def sarFileName = services[i]
+           def sarFileName = sars[i]
            installSar(sarFileName)
         }
     }
