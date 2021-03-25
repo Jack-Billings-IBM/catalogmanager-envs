@@ -3,7 +3,6 @@ node('master') {
    env.JAVA_HOME = "${jdk}"
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
-   server = "${server}"
    def services = [ "${service1}", "${service2}", "${service4}", "${service5}", "${service6}", "${service7}", "${service8}", "${service9}", "${service10}", "${service11}", "${service12}", "${service13}", "${service14}", "${service15}", "${service16}", "${service17}", "${service18}", "${service19}", "${service20}"]
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
