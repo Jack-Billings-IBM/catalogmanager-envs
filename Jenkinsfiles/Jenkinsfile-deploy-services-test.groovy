@@ -17,7 +17,7 @@ node('master') {
          "files": [
             {
                "pattern": "*.sar",
-               "target": "${repo_name}/services/"
+               "target": "${artifactory_repo_name}/services/"
             }
             ]
          }"""
