@@ -6,6 +6,7 @@ node('master') {
    server = "${server}"
    //def services = [ "${service1}", "${service2}", "${service3}" ]
    def artifacts = []
+   int intNum = 0
    
 
    stage('Checkout sar Files from Artifactory') {
@@ -43,8 +44,9 @@ node('master') {
               //display all the services
               println "${artifacts}"
               //determine how many services
-              int intNum = artifacts.size()
+              intNum = artifacts.size()
               println "The length of the array is: " + intNum
+              sh "rm *.sar"
          }
       
    }
