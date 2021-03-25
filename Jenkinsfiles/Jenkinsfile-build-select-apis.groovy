@@ -36,7 +36,6 @@ node('master') {
        def artifactory_server = Artifactory.server "artifactory"
        println "Publishing to server: "+artifactory_server
        
-       int intNum = apis.size()
        println "The number of APIs to publish: " + intNum
        
        // loops thorugh each aar created and publishes it to your artifactory server
