@@ -10,7 +10,6 @@ node('master') {
    int intNum = stringNum as int
 
    stage('Checkout aar Files from Artifactory') {
-      sh "rm -r *"
       println "Downloading API artifacts (aar) from Artifactory" 
       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
        def artifactory_server = Artifactory.server "artifactory"
@@ -63,6 +62,7 @@ node('master') {
            def aarFileName = aars[i]
            installAar(aarFileName)
         }
+       sh "rm -r *"
     }
    
 
