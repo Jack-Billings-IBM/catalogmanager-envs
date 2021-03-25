@@ -30,9 +30,14 @@ node('master') {
           artifactory_server.download spec: downloadSpec 
         }  
         dir("artifacts/services/") {
-              for (int i = 0; i < intNum; i++) {
-                 service = services[i]
-                 sars.add(service)
+              //read contents of artifacts folder into artifacts file
+              sh "ls | grep -vx 'artifacts' > artifacts"
+              
+              //creates a file named data from artifacts file, reads each line of data and appends each line (service artifact) to list services
+              def data = readFile(file: 'artifacts')
+              def lines = data.readLines()
+              for (line in lines) {
+                 sars.add(line)
               }
 
               println "sar files that will be uploaded to server "+server
