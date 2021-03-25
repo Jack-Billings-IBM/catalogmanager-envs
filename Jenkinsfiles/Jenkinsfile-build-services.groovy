@@ -15,7 +15,7 @@ node('master') {
    }
    
    stage("test reading file names") {
-      def services = []
+      def folder_services = []
       //sh "ls > folders"
       sh "ls > folders"
       sh "cat folders"
@@ -26,7 +26,7 @@ node('master') {
       }
       def lines = data.readLines()
       for (line in lines) {
-         services.add(line)
+         folder_services.add(line)
       }
       
    }
