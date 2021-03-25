@@ -40,7 +40,7 @@ node('master') {
                  services.add(line)
               }
 
-              println "Display sar files that will be uploaded to server "+server"
+              println "Display sar files that will be uploaded to server "+server
               println "${sars}"
               //determine how many services
               intNum = sars.size()
