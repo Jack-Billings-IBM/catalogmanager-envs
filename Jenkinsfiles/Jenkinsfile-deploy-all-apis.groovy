@@ -10,8 +10,6 @@ node('master') {
    
 
    stage('Checkout aar Files from Artifactory') {
-      sh "pwd"
-      sh "ls"
       sh "rm -r *"
       println "Downloading API artifacts (aar) from Artifactory" 
       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
