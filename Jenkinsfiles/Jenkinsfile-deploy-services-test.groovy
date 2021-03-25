@@ -4,7 +4,7 @@ node('master') {
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
    server = "${server}"
-   def services = [ "${service1}", "${service2}", "${service3}" ]
+   //def services = [ "${service1}", "${service2}", "${service3}" ]
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
    
