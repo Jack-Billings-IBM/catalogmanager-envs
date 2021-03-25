@@ -3,10 +3,9 @@ node('master') {
    env.JAVA_HOME = "${jdk}"
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
-   def folder_services = []
-   
+   def services = []
    server = "${artifactory_server}"
-   def services = [ "${service1}", "${service2}", "${service3}" ]
+   def services2 = [ "${service1}", "${service2}", "${service3}" ]
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
    
@@ -17,28 +16,17 @@ node('master') {
    }
    
    stage("test reading file names") {
-      
-      sh "pwd"
-      sh "ls"
-      sh "cd services"
-      sh "pwd"
-      //sh "ls > folders"
-      sh "ls"
       dir("services") {
-         sh "pwd"
          sh "ls"
-         sh "ls > folders"
-         sh "cat folders"
-         def data = readFile(file: 'folders')
-         println(data)
-         data.eachLine { String line ->
-            println line
-         }
+         sh "ls > services"
+         sh "cat services"
+         sh "rm -f services"
+         def data = readFile(file: 'services')
          def lines = data.readLines()
          for (line in lines) {
-            folder_services.add(line)
+            services.add(line)
          }
-         println "${folder_services}"
+         println "${services}"
       }
       
    }
