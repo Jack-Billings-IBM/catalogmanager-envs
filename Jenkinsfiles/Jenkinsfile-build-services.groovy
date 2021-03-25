@@ -10,7 +10,7 @@ node('master') {
    
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
-      println "project name is catalog"
+      // need to define git credentials
       git credentialsId: 'git', url: '${git_url}'
    }
 
@@ -21,7 +21,6 @@ node('master') {
         println output
         
         dir("services") {
-           sh "rm *"
            sh "ls"
            sh "ls | grep -vx 'services' > services"
            sh "cat services"
@@ -43,6 +42,7 @@ node('master') {
    
     stage("Publish Artifacts to Artifactory") {
        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+       // need to define artifactory server
        def server = Artifactory.server "artifactory"
 
        // Read the upload spec which was downloaded from github.
