@@ -23,8 +23,6 @@ node('master') {
          }"""
 
          server.download spec: downloadSpec   
-
-       }
    }
    
   stage('Check for and Handle Existing Services') {
@@ -49,37 +47,6 @@ node('master') {
            def serviceName = services[i]
            testServices(serviceName)
         }
-    }
-   
-    stage("Publish Artifacts to Artifactory") {
-       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
-       def server = Artifactory.server "artifactory"
-
-       // Read the upload spec which was downloaded from github.
-       for (int i = 0; i < intNum; i++) {
-          def sarFileName = services[i] 
-          def uploadSpecTest = """{
-            "files": [
-               {
-                  "pattern": "${sarFileName}.sar",
-                  "target": "${repo_name}/services/"
-               }
-               ]
-            }"""
-                  // Upload to Artifactory.
-            def buildInfo = server.upload spec: uploadSpecTest
-
-            // Publish the build to Artifactory
-            server.publishBuildInfo buildInfo
-        }    
-       
-       
-       //sh "rm response.json"
-       //sh "rm responseStop.json"
-       for (int i = 0; i < intNum; i++) {
-           def sarFileName = services[i]
-           sh "rm "+sarFileName+".sar"
-        }      
     }
    
 
