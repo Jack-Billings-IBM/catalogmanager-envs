@@ -41,7 +41,7 @@ node('master') {
               //determine how many services
               intNum = services.size()
               println "The number of services being deployed is: " + intNum
-              sh "rm *.sar"
+
          }
       
    }
