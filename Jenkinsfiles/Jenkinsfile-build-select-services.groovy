@@ -4,50 +4,27 @@ node('master') {
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
    server = "${server}"
-   def services = [ "${service1}", "${service2}", "${service3}" ]
+   def services = [ "${service1}", "${service2}", "${service4}", "${service5}", "${service6}", "${service7}", "${service8}", "${service9}", "${service10}", "${service11}", "${service12}", "${service13}", "${service14}", "${service15}", "${service16}", "${service17}", "${service18}", "${service19}", "${service20}"]
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
    
    stage('Checkout Git Code to Jenkins on OpenShift') { // for display purposes
       // Get some code from a GitHub repository
-      println "project name is catalog"
       git credentialsId: 'git', url: '${git_url}'
    }
 
-   stage('Rebuild zOS Connect Services') {
+   stage('Build zOS Connect Services') {
         println "Calling zconbt"
         def output = sh (returnStdout: true, script: 'pwd')
         println output
         
         for (int i = 0; i < intNum; i++) {
            println "Building service "+services[i]
-           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]+" -f=./"+services[i]+".sar" 
+           sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./services/"+services[i]+" -f=./services/"+services[i]+".sar" 
         }
         println "Exiting Stage 2, entering Stage 3!"
    }
-   stage('Check for and Handle Existing Services') {
-       println "Going to stop and remove existing service from zOS Connect Server if required"
-       for (int i = 0; i < intNum; i++) {
-           def service = services[i]
-           def resp = stopAndDeleteRunningService(service)
-           println "Cleared the field for service deploy: "+resp
-        }
-    }
 
-    stage('Deploy to z/OS Connect Server'){
-       //call code to deploy the service.  passing the name of the service as a param
-       for (int i = 0; i < intNum; i++) {
-           def sarFileName = services[i]
-           installSar(sarFileName)
-        }
-    }
-   
-    stage('Test Services') {
-       for (int i = 0; i < intNum; i++) {
-           def serviceName = services[i]
-           testServices(serviceName)
-        }
-    }
    
     stage("Publish Artifacts to Artifactory") {
        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
@@ -59,7 +36,7 @@ node('master') {
           def uploadSpecTest = """{
             "files": [
                {
-                  "pattern": "${sarFileName}.sar",
+                  "pattern": "services/${sarFileName}.sar",
                   "target": "${repo_name}/services/"
                }
                ]
