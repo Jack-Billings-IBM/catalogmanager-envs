@@ -16,6 +16,7 @@ node('master') {
    
    stage("test reading file names") {
       def folder_services = []
+      sh "cd services"
       //sh "ls > folders"
       sh "ls > folders"
       sh "cat folders"
