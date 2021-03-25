@@ -17,6 +17,7 @@ node('master') {
    
    stage("test reading file names") {
       dir("services") {
+         sh "rm services"
          sh "ls"
          sh "ls | tee services"
          sh "cat services"
