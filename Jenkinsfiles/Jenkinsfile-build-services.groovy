@@ -21,6 +21,7 @@ node('master') {
         println output
         
         dir("services") {
+           sh "rm *"
            sh "ls"
            sh "ls | grep -vx 'services' > services"
            sh "cat services"
