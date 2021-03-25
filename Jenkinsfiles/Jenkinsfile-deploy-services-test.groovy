@@ -5,8 +5,7 @@ node('master') {
    
    server = "${server}"
    //def services = [ "${service1}", "${service2}", "${service3}" ]
-   stringNum = "${number_of_services}"
-   int intNum = stringNum as int  
+   def artifacts = []
    
 
    stage('Checkout sar Files from Artifactory') {
@@ -21,8 +20,33 @@ node('master') {
             }
             ]
          }"""
-
+         sh "pwd"
+         sh "ls"
          server.download spec: downloadSpec   
+         sh "pwd"
+         sh "ls"
+      
+         dir("services/artifacts") {
+              sh "pwd"
+              sh "ls"
+              //read contents of services folder into services file
+              sh "ls | grep -vx 'artifacts' > artifacts"
+              //show contents of services file
+              sh "cat artifacts"
+
+              //creates a file named data from services file, reads each line of data and appends each line (service) to list services
+              def data = readFile(file: 'artifacts')
+              def lines = data.readLines()
+              for (line in lines) {
+                 services.add(line)
+              }
+              //display all the services
+              println "${artifacts}"
+              //determine how many services
+              int intNum = artifacts.size()
+              println "The length of the array is: " + intNum
+
+      
    }
    
   stage('Check for and Handle Existing Services') {
