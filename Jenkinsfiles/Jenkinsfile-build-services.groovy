@@ -14,16 +14,8 @@ node('master') {
 
 
    stage('Build zOS Connect Services') {
-        println "Calling zconbt"
-        def output = sh (returnStdout: true, script: 'pwd')
-        println output
-        
         //cd into the services folder
         dir("services") {
-           println "Building in the services directory: "
-           sh "pwd"
-           println "Building these services: "
-           sh "ls"
            //read contents of services folder into services file
            sh "ls | grep -vx 'services' > services"
            
@@ -37,6 +29,7 @@ node('master') {
            //determine how many services
            int intNum = services.size()
            println "The number of services to be built: " + intNum
+           println "Building these services: "+services
            
            //create sar file for each service
            for (int i = 0; i < intNum; i++) {
