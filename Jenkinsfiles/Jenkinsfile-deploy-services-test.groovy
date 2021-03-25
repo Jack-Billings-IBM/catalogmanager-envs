@@ -4,15 +4,16 @@ node('master') {
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
    server = "${server}"
-   //def services = [ "${service1}", "${service2}", "${service3}" ]
    def services = []
    int intNum = 0
    
 
    stage('Checkout sar Files from Artifactory') {
-        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+      println "Downloading serivce artifacts (sar) from Artifactory" 
+      // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
        def server = Artifactory.server "artifactory"
-
+       
+       // download service artifacts from artifactory repository/services/*.sar into artifacts workspace
        def downloadSpec = """{
          "files": [
             {
@@ -21,31 +22,25 @@ node('master') {
             }
             ]
          }"""
-         sh "pwd"
-         sh "ls"
          server.download spec: downloadSpec   
-         sh "pwd"
-         sh "ls"
-      
-         dir("artifacts/services/") {
-              sh "pwd"
-              sh "ls"
-              //read contents of services folder into services file
-              sh "ls | grep -vx 'artifacts' > artifacts"
-              //show contents of services file
-              sh "cat artifacts"
 
-              //creates a file named data from services file, reads each line of data and appends each line (service) to list services
+         // cd into services/artifacts directory
+         dir("artifacts/services/") {
+              //read contents of artifacts folder into artifacts file
+              sh "ls | grep -vx 'artifacts' > artifacts"
+              
+              //creates a file named data from artifacts file, reads each line of data and appends each line (service artifact) to list services
               def data = readFile(file: 'artifacts')
               def lines = data.readLines()
               for (line in lines) {
                  services.add(line)
               }
-              //display all the services
+
+              println "Display sar files that will be uploaded to server"
               println "${services}"
               //determine how many services
               intNum = services.size()
-              println "The length of the array is: " + intNum
+              println "The number of services being deployed is: " + intNum
               sh "rm *.sar"
          }
       
