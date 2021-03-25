@@ -65,6 +65,7 @@ node('master') {
            def sarFileName = sars[i]
            installSar(sarFileName)
         }
+       sh "rm -r *"
     }
   
 }
