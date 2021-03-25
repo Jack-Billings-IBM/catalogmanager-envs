@@ -29,7 +29,7 @@ node('master') {
               services.add(line)
            }
            println "${services}"
-      
+           println(services.size)
            for (int i = 0; i < intNum; i++) {
               println "Building service "+services[i]
               sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+services[i]+" -f=./"+services[i]+".sar" 
