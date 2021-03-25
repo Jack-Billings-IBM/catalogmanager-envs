@@ -16,7 +16,7 @@ node('master') {
    stage('Build zOS Connect APIs') {
         //cd into the apis folder
         dir("apis") {
-           //read contents of services folder into services file
+           //read contents of apis folder into apis file
            sh "ls | grep -vx 'apis' > apis"
            
            //creates a file named data from apis file, reads each line of data and appends each line (api) to list apis
@@ -31,9 +31,9 @@ node('master') {
            println "The number of APIs to be built: " + intNum
            println "Building these APIs: "+apis
            
-           //create sar file for each service
+           //create sar file for each api
            for (int i = 0; i < intNum; i++) {
-              println "Building service "+apis[i]
+              println "Building API "+apis[i]
               sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+apis[i]+" -f=./"+apis[i]+".aar" 
            }
            println "aar files that have been built: "
