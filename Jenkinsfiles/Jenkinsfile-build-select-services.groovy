@@ -13,10 +13,7 @@ node('master') {
    }
 
    stage('Build zOS Connect Services') {
-        println "Calling zconbt"
-        def output = sh (returnStdout: true, script: 'pwd')
-        println output
-        
+
         for (int i = 0; i < intNum; i++) {
            println "Building service "+services[i]
            sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./services/"+services[i]+" -f=./"+services[i]+".sar" 
