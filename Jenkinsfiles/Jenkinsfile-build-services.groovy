@@ -4,7 +4,6 @@ node('master') {
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
    def services = []
-   server = "${artifactory_server}"
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
    
