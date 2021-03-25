@@ -138,7 +138,7 @@ node('master') {
 
       //call utility to get saved credentials and build curl command with it and sar file name and then execute command
       //curl command spits out response code into stdout.  that's then held in respCode field to evaluate
-       def command_val = "curl -X POST -o response.json -w %{response_code} --header 'Content-Type:application/zip' --data-binary @${WORKSPACE}/"+sarFileName+" --insecure "+urlval
+       def command_val = "curl -X POST -o response.json -w %{response_code} --header 'Content-Type:application/zip' --data-binary @${WORKSPACE}/artifacts/services/"+sarFileName+" --insecure "+urlval
        respCode = sh (script: command_val, returnStdout: true)
 
        println "Service Installation Response code is: "+respCode
