@@ -21,7 +21,7 @@ node('master') {
            //create sar file for each api
            for (int i = 0; i < intNum; i++) {
               println "Building API "+apis[i]
-              sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./"+apis[i]+" -f=./"+apis[i]+".aar" 
+              sh "${WORKSPACE}/zconbt/bin/zconbt -pd=./apis/"+apis[i]+" -f=./"+apis[i]+".aar" 
            }
            println "aar files that have been built: "
            println "${apis}"
