@@ -13,26 +13,18 @@ node('master') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
        def server = Artifactory.server "artifactory"
 
-          def downloadSpec = """{
-            "files": [
-               {
-                  "pattern": "*.sar",
-                  "target": "${repo_name}/services/"
-               }
-               ]
-            }"""
+       def downloadSpec = """{
+         "files": [
+            {
+               "pattern": "*.sar",
+               "target": "${repo_name}/services/"
+            }
+            ]
+         }"""
 
          server.download spec: downloadSpec   
 
-        }    
-       
-       
-       //sh "rm response.json"
-       //sh "rm responseStop.json"
-       for (int i = 0; i < intNum; i++) {
-           def sarFileName = services[i]
-           sh "rm "+sarFileName+".sar"
-        }   
+       }
    }
    
   stage('Check for and Handle Existing Services') {
