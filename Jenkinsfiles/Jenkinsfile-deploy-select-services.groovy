@@ -9,7 +9,6 @@ node('master') {
    int intNum = stringNum as int  
 
    stage('Checkout sar Files from Artifactory') {
-       sh "rm -r *"
        println "Downloading serivce artifacts (sar) from Artifactory" 
        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
        // artifactoy server is defined in Jenkins
