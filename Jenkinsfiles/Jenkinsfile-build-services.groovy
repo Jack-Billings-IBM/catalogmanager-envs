@@ -5,7 +5,6 @@ node('master') {
    
    def services = []
    server = "${artifactory_server}"
-   def services2 = [ "${service1}", "${service2}", "${service3}" ]
    stringNum = "${number_of_services}"
    int intNum = stringNum as int  
    
