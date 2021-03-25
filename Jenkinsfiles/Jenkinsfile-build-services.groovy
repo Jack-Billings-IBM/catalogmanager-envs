@@ -28,7 +28,7 @@ node('master') {
       for (line in lines) {
          folder_services.add(line)
       }
-      
+      println "${folder_services}"
    }
 
    stage('Build zOS Connect Services') {
