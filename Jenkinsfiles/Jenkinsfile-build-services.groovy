@@ -17,8 +17,11 @@ node('master') {
    stage("test reading file names") {
       def folder_services = []
       sh "pwd"
+      sh "ls"
       sh "cd services"
+      sh "pwd"
       //sh "ls > folders"
+      sh "ls"
       sh "ls > folders"
       sh "cat folders"
       def data = readFile(file: 'folders')
