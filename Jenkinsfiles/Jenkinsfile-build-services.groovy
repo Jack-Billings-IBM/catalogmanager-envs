@@ -3,6 +3,8 @@ node('master') {
    env.JAVA_HOME = "${jdk}"
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
+   def folder_services = []
+   
    server = "${artifactory_server}"
    def services = [ "${service1}", "${service2}", "${service3}" ]
    stringNum = "${number_of_services}"
@@ -15,25 +17,30 @@ node('master') {
    }
    
    stage("test reading file names") {
-      def folder_services = []
+      
       sh "pwd"
       sh "ls"
       sh "cd services"
       sh "pwd"
       //sh "ls > folders"
       sh "ls"
-      sh "ls > folders"
-      sh "cat folders"
-      def data = readFile(file: 'folders')
-      println(data)
-      data.eachLine { String line ->
-         println line
+      dir("services") {
+         sh "pwd"
+         sh "ls"
+         sh "ls > folders"
+         sh "cat folders"
+         def data = readFile(file: 'folders')
+         println(data)
+         data.eachLine { String line ->
+            println line
+         }
+         def lines = data.readLines()
+         for (line in lines) {
+            folder_services.add(line)
+         }
+         println "${folder_services}"
       }
-      def lines = data.readLines()
-      for (line in lines) {
-         folder_services.add(line)
-      }
-      println "${folder_services}"
+      
    }
 
    stage('Build zOS Connect Services') {
