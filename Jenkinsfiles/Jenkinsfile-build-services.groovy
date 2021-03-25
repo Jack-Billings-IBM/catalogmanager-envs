@@ -20,7 +20,6 @@ node('master') {
         println output
         
         dir("services") {
-           sh "rm *.sar"
            sh "ls"
            sh "ls | grep -vx 'services' > services"
            sh "cat services"
