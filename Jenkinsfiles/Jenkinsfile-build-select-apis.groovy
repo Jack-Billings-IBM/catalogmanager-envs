@@ -3,7 +3,7 @@ node('master') {
    env.JAVA_HOME = "${jdk}"
    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
    
-   def apis = [ "${service1}", "${service2}"]
+   def apis = [ "${api1}", "${api2}"]
    stringNum = "${number_of_apis}"
    int intNum = stringNum as int  
    
