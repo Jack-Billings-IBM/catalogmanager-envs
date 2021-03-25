@@ -26,7 +26,7 @@ node('master') {
            println "aar files that have been built: "
            println "${apis}"
            sh "rm *.aar"
-           println "Exiting Stage 2, entering Stage 3!"
+           println "Built all the APIs, publishing to artifact repository next"
    }
 
    
