@@ -26,7 +26,7 @@ node('master') {
             }"""
           // Download from Artifactory.
           artifactory_server.download spec: downloadSpec 
-        }  
+
         dir("artifacts/apis/") {
               //read contents of artifacts folder into artifacts file
               sh "ls | grep -vx 'artifacts' > artifacts"
