@@ -12,10 +12,13 @@ node('master') {
    stage('Checkout aar Files from Artifactory') {
       println "Downloading API artifacts (aar) from Artifactory" 
       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
-       def artifactory_server = Artifactory.server "artifactory"
+      def artifactory_server = Artifactory.server "artifactory"
        
-       // download API artifacts from artifactory repository/apis/*.aar into artifacts workspace
-       def downloadSpec = """{
+      // download API artifacts from artifactory repository/apis/*.aar into artifacts workspace
+      for (int i = 0; i < intNum; i++) {
+          def aarFileName = apis[i] 
+          println "Downloading "+aarFileName+" from Artifactory server "+server
+          def downloadSpec = """{
             "files": [
                {
                   "pattern": "${artifactory_repo_name}/apis/${aarFileName}.aar",
@@ -25,7 +28,7 @@ node('master') {
             }"""
           // Download from Artifactory.
           artifactory_server.download spec: downloadSpec 
-
+       }
         dir("artifacts/apis/") {
               //read contents of artifacts folder into artifacts file
               sh "ls | grep -vx 'artifacts' > artifacts"
