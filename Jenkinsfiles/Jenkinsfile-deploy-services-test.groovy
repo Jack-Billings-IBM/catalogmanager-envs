@@ -9,6 +9,7 @@ node('master') {
    
 
    stage('Checkout sar Files from Artifactory') {
+      sh "rm -rf services/artifacts/"
       println "Downloading serivce artifacts (sar) from Artifactory" 
       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
        def server = Artifactory.server "artifactory"
@@ -26,7 +27,7 @@ node('master') {
 
          // cd into services/artifacts directory
          dir("artifacts/services/") {
-              sh "rm *.sar"
+              
               //read contents of artifacts folder into artifacts file
               sh "ls | grep -vx 'artifacts' > artifacts"
               
