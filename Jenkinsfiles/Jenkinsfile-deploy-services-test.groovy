@@ -13,7 +13,7 @@ node('master') {
       sh "rm -r artifacts/"
       println "Downloading serivce artifacts (sar) from Artifactory" 
       // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
-       def server = Artifactory.server "artifactory"
+       def artifactory_server = Artifactory.server "artifactory"
        
        // download service artifacts from artifactory repository/services/*.sar into artifacts workspace
        def downloadSpec = """{
@@ -24,7 +24,7 @@ node('master') {
             }
             ]
          }"""
-         server.download spec: downloadSpec   
+         artifactory_server.download spec: downloadSpec   
 
          // cd into services/artifacts directory
          dir("artifacts/services/") {
