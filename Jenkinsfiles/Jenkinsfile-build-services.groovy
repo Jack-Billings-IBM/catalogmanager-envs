@@ -21,7 +21,7 @@ node('master') {
       sh "cat folders"
       def data = readFile(file: 'folders')
       println(data)
-      data.each { String line ->
+      data.eachLine { String line ->
          println line
       }
    }
